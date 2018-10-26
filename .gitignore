@@ -1,2 +1,6 @@
-/.idea/
+# intellij idea
+.idea/
 .idea/workspace.xml
+
+# DB
+blockchain_%s.db

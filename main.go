@@ -7,15 +7,14 @@ import (
 	"sync"
 	"time"
 
-	// 표준 패키지 이외의 패키지를 가져올 경우 절대 경로로
-	//structs and slices cleanly formatted package in our console
-	"gochain/pkg/github.com/davecgh/go-spew/spew"
 	//writing web handlers package
-	"gochain/pkg/github.com/gorilla/mux"
-	//lets us read from a .env file package
-	"gochain/pkg/github.com/joho/godotenv"
+	"github.com/gorilla/mux"
 
-	"../gochain/src/gc_core"
+	//"github.com/cchaining/gochain/gc_cmd"
+	//"gc_cmd"
+	//"core"
+	"./core"
+	"./cmd"
 )
 
 
@@ -28,26 +27,27 @@ func main() {
 	//go루틴 체계를 생각을 해보는것도 좋을듯
 	//Cli의 명령을 http 라우터와 연동시킬 필요가 있음
 	/***************************************/
-	//bc := NewBlockchain()
-	//defer bc.db.Close()
-	//
-	//cli := CLI{bc}
-	//cli.Run()
+	bc := core.NewBlockchain()
+	log.Println("get blocks success", bc)
+	defer bc.Db.Close()
+
+	cli := cmd.CLI{bc}
+	cli.Run()
 	/***************************************/
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	go func() {
-		bc := gc_core.NewBlockchain()
-		spew.Dump(bc)
-
-		mutex.Lock()
-		mutex.Unlock()
-	}()
-	log.Fatal(run())
+	//err := godotenv.Load()
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//
+	//go func() {
+	//	bc := gc_core.NewBlockchain()
+	//	spew.Dump(bc)
+	//
+	//	mutex.Lock()
+	//	mutex.Unlock()
+	//}()
+	//log.Fatal(run())
 
 }
 // web server
