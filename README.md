@@ -15,10 +15,26 @@ Go lang으로 구현한 기본적인 블록체인
 - VOLTDB
 - 거래 후 잔여 UTXO SET 지원
 
-# gochain 네트워크 실행
+# gochain GOPATH 설정 방법
+1. 우선 go path를 설정한다.
 
 ```
-go run main.go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
+2. go 디렉토리로 이동한다.
+```
+cd go
+```
+3. github 레퍼지토리를 clone 한다.
+```
+git clone https://github.com/cchaining/gochain.git
+```
+
+# gochain 커멘드 실행
+
+```
+go run main.go [명령어]
 ```
 
 # 기여자
