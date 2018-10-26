@@ -15,9 +15,24 @@ Go lang으로 구현한 기본적인 블록체인
 - VOLTDB
 - 거래 후 잔여 UTXO SET 지원
 
+# gochain 네트워크 실행
+
+```
+go run main.go
+```
+
 # 기여자
-ParkDongJo(Charles) / myunghui
+ParkDongJo(Charles) , myunghui, bimong
 
 # 참고 코드
 [naive coin 깃헙 링크](https://github.com/lhartikk/naivecoin)
+<br>
 [go lang blockchain core ex](https://medium.com/@mycoralhealth/code-your-own-blockchain-in-less-than-200-lines-of-go-e296282bcffc)
+<br>
+[go lang 문법 쉽게 풀어쓴 사이트](https://gobyexample.com/)
+<br>
+[go lang tutorial 사이트](https://www.tutorialspoint.com/developers_best_practices/index.htm)
+<br>
+[Go로 구현하는 블록체인](https://mingrammer.com/building-blockchain-in-go-part-2/#%EC%84%9C%EB%A1%A0)
+<br>
+[Building Blockchain in Go](https://jeiwan.cc/posts/building-blockchain-in-go-part-1/)
