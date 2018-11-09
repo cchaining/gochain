@@ -4,3 +4,7 @@
 
 # DB
 blockchain_%s.db
+blockchain_*.db
+
+# Wallet
+wallet_*.dat
