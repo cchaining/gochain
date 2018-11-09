@@ -1,11 +1,10 @@
-/**
-gc_cmd 패키지 :
-
-cli 파일을 담고 있다.
-커맨드라인에서 명령어를 통해 블록체인 코어를 실행하고 조절하는 go 파일을 담고있다.
-ethereum으로 비교하자면 console 패키지와 같다.
-
-*/
+/*
+ * cmd 패키지 :
+ *
+ * cli 파일을 담고 있다.
+ * 커맨드라인에서 명령어를 통해 블록체인 코어를 실행하고 조절하는 go 파일을 담고있다.
+ * ethereum으로 비교하자면 console 패키지와 같다.
+ */
 package cmd
 
 import (
@@ -15,21 +14,24 @@ import (
 	"os"
 )
 
-// field 가 앞글자 대문자 이면 public
-// 소문자이면 private 외부에서 호출할 수 없다
-// CLI responsible for processing command line arguments
+//__[필기]__
+/*
+ * field 가 앞글자 대문자 이면 public
+ * 소문자이면 private 외부에서 호출할 수 없다
+ * CLI responsible for processing command line arguments
+ */
 type CLI struct{}
 
 func (cli *CLI) printUsage() {
-	fmt.Println("Usage:")
-	fmt.Println("  createblockchain -address ADDRESS - Create a blockchain and send genesis block reward to ADDRESS")
-	fmt.Println("  createwallet - Generates a new key-pair and saves it into the wallet file")
-	fmt.Println("  getbalance -address ADDRESS - Get balance of ADDRESS")
-	fmt.Println("  listaddresses - Lists all addresses from the wallet file")
-	fmt.Println("  printchain - Print all the blocks of the blockchain")
-	fmt.Println("  reindexutxo - Rebuilds the UTXO set")
-	fmt.Println("  send -from FROM -to TO -amount AMOUNT -mine - Send AMOUNT of coins from FROM address to TO. Mine on the same node, when -mine is set.")
-	fmt.Println("  startnode -miner ADDRESS - Start a node with ID specified in NODE_ID env. var. -miner enables mining")
+	fmt.Println("사용법 : ")
+	fmt.Println("  createblockchain -address ADDRESS            - 블록체인을 생성하고 제네시스 블록의 보상을 해당 주소로 보낸다.")
+	fmt.Println("  createwallet                                 - 새로운 키를 생성하고 지갑 파일로 저장한다.")
+	fmt.Println("  getbalance -address ADDRESS                  - 해당 주소의 밸런스를 확인한다.")
+	fmt.Println("  listaddresses                                - 모든 지갑 파일의 주소목록을 보여준다.")
+	fmt.Println("  printchain                                   - 블록체인의 모든 블록을 보여준다.")
+	fmt.Println("  reindexutxo                                  - UTXO Set을 재설정 한다.")
+	fmt.Println("  send -from FROM -to TO -amount AMOUNT -mine  - 일정량의 코인을 FROM 주소에서 TO 주소로 보낸다. Mine on the same node, when -mine is set.")
+	fmt.Println("  startnode -miner ADDRESS                     - 시스템환경에 셋팅한 NODE_ID의 특정 노드는 마이닝을 시작한다.")
 }
 
 func (cli *CLI) validateArgs() {
@@ -44,9 +46,9 @@ func (cli *CLI) Run() {
 	cli.validateArgs()
 
 	nodeID := os.Getenv("NODE_ID")
-	log.Println("HTTP Server Listening on nodeID :", nodeID)
+	log.Println("HTTP Server nodeID : ", nodeID, " 서버가 열렸습니다. ")
 	if nodeID == "" {
-		fmt.Printf("NODE_ID env. var is not set!")
+		fmt.Printf("NODE_ID env. 가 설정되지 않았습니다.")
 		os.Exit(1)
 	}
 
