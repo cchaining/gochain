@@ -1,10 +1,15 @@
-/**
-gc_core 패키지 :
+/*
+ * core 패키지 :
+ *
+ * block, blockchain, chain_iterator를 담고있는 패키지이다.
+ * chain과 관련된 go 파일을 담고있다. ethereum으로 비교하자면 core 패키지와 같다.
+ */
 
-block, blockchain, chain_iterator를 담고있는 패키지이다.
-chain과 관련된 go 파일을 담고있다. ethereum으로 비교하자면 core 패키지와 같다.
-
-*/
+/*
+ * block go 파일 :
+ *
+ *
+ */
 package core
 
 import (

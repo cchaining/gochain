@@ -2,6 +2,8 @@
 
 Go lang으로 구현한 기본적인 블록체인
 
+[자세한 설명](https://github.com/gochain/documents/guide)
+
 # 구현 목적
 
 블록체인의 기본 구조를 파악하여 직접구현하고, 향후 이더리움 블록체인 오픈소스에 기여하기 위한
@@ -38,7 +40,8 @@ go run main.go [명령어]
 ```
 
 # 기여자
-ParkDongJo(Charles) , myunghui, bimong
+@ParkDongJo(Charles)[github](https://github.com/ParkDongJo) 
+@myunghui[github](https://github.com/myunghui)
 
 # 참고 코드
 [naive coin 깃헙 링크](https://github.com/lhartikk/naivecoin)
