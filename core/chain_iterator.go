@@ -3,8 +3,9 @@ package core
 import (
 	"github.com/boltdb/bolt"
 	"log"
-)
 
+	"../internal"
+)
 
 type BlockchainIterator struct {
 	currentHash []byte
@@ -15,7 +16,7 @@ func (i *BlockchainIterator) Next() *Block {
 	var block *Block
 
 	err := i.db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(blocksBucket))
+		b := tx.Bucket([]byte(internal.BlocksBucket))
 		encodedBlock := b.Get(i.currentHash)
 		block = DeserializeBlock(encodedBlock)
 		return nil
@@ -27,4 +28,3 @@ func (i *BlockchainIterator) Next() *Block {
 	i.currentHash = block.PrevBlockHash
 	return block
 }
-

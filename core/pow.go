@@ -1,5 +1,4 @@
-package miner
-
+package core
 
 import (
 	"bytes"
@@ -8,9 +7,8 @@ import (
 	"math"
 	"math/big"
 
-	"../core"
+	"../crypto"
 )
-
 
 var (
 	maxNonce = math.MaxInt64
@@ -19,12 +17,11 @@ var (
 const targetBits = 24
 
 type ProofOfWork struct {
-	block *core.Block
+	block  *Block
 	target *big.Int
 }
 
-
-func NewProofOfWork(b *core.Block) *ProofOfWork {
+func NewProofOfWork(b *Block) *ProofOfWork {
 	target := big.NewInt(1)
 	target.Lsh(target, uint(256-targetBits))
 
@@ -32,21 +29,19 @@ func NewProofOfWork(b *core.Block) *ProofOfWork {
 	return pow
 }
 
-
 func (pow *ProofOfWork) prepareData(nonce int) []byte {
 	data := bytes.Join(
 		[][]byte{
 			pow.block.PrevBlockHash,
-			pow.block.Data,
-			IntToHex(pow.block.Timestamp),
-			IntToHex(int64(targetBits)),
-			IntToHex(int64(nonce)),
+			pow.block.HashTransactions(),
+			crypto.IntToHex(pow.block.Timestamp),
+			crypto.IntToHex(int64(targetBits)),
+			crypto.IntToHex(int64(nonce)),
 		},
 		[]byte{},
 	)
 	return data
 }
-
 
 /*
 
@@ -55,13 +50,13 @@ func (pow *ProofOfWork) prepareData(nonce int) []byte {
 	3. 해시값의 큰 정수로의 변환
 	4. 정수값과 타겟값 비교
 
- */
+*/
 func (pow *ProofOfWork) Run() (int, []byte) {
 	var hashInt big.Int
 	var hash [32]byte
 	nonce := 0
 
-	fmt.Printf("Mining the block containing \"%s\"\n", pow.block.Data)
+	fmt.Printf("Mining the block containing \"%x\"\n", pow.block.Transactions)
 
 	for nonce < maxNonce {
 		data := pow.prepareData(nonce)
@@ -80,7 +75,6 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 	return nonce, hash[:]
 }
 
-
 func (pow *ProofOfWork) Validate() bool {
 	var hashInt big.Int
 
@@ -91,4 +85,3 @@ func (pow *ProofOfWork) Validate() bool {
 	isValid := hashInt.Cmp(pow.target) == -1
 	return isValid
 }
-

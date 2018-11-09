@@ -1,4 +1,4 @@
-package miner
+package crypto
 
 import (
 	"bytes"
